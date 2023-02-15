@@ -1,5 +1,5 @@
-import { genInventory } from "./gen"
-export const inventory = {
+import { genInventory, genOrder } from "./gen"
+const inventory = {
     tableData: genInventory(),
     column: [
         { label: 'ID', accessor: 'id', sortable: true },
@@ -11,7 +11,7 @@ export const inventory = {
     ]
 }
 export const order = {
-    tableData: null,
+    tableData: genOrder(),
     column: [
         { label: 'ID', accessor: 'id', sortable: true },
         { label: 'Customer Name', accessor: 'customer_name', sortable: true },
@@ -20,3 +20,4 @@ export const order = {
         { label: 'Status', accessor: 'status', sortable: false },
     ]
 }
+export const data = {inventory, order}

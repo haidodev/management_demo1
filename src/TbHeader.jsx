@@ -1,7 +1,7 @@
 import { useState } from "react"
 export const TbHeader = ({ headerList, handleSorting }) => {
-    const [sortField, setSortField] = useState('');
-    const [sortOrder, setSortOrder] = useState('');
+    const [sortField, setSortField] = useState('id');
+    const [sortOrder, setSortOrder] = useState('asc');
     const handleSortingChange = (accessor) => {
         const order = (accessor === sortField && sortOrder === 'asc' ? 'dec' : 'asc');
         setSortOrder(order);

@@ -1,6 +1,6 @@
-import { inventory } from "./data"
-export const requestForData = () => new Promise(resolve => {
+import {data} from "./data"
+export const requestForData = (dataType) => new Promise(resolve => {
     setTimeout(() => {
-        resolve({ tableData: inventory.tableData, column: inventory.column })
+        resolve({ tableData: data[dataType].tableData, column: data[dataType].column })
     }, 1000);
 });

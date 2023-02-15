@@ -2,30 +2,9 @@ import { Table } from "./Table"
 import { useState, useEffect } from "react"
 import { SearchBar } from "./SearchBar"
 import { requestForData } from "./additionalFunction"
-export const MainContent = () => {
-    const [column, setColumn] = useState();
-    const [tableData, setTableData] = useState();
+import { order } from "./data"
 
-    const sortData = (sortField, sortOrder) => {
-        if (!tableData) return;
-        if (!tableData[0].hasOwnProperty(sortField)) return;
-        const initialState = sortOrder == 'asc' ? 1 : -1;
-        setTableData(prev => {
-            return [...prev].sort((item1, item2) => {
-                if (item1[sortField] > item2[sortField]) return 1 * initialState;
-                if (item1[sortField] < item2[sortField]) return -1 * initialState;
-                return 0;
-            })
-        })
-    }
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await requestForData();
-            setColumn(data.column)
-            setTableData(data.tableData)
-        }
-        fetchData();
-    }, []);
+export const MainContent = () => {
     return (
         <div className="p-4 sm:ml-64">
             <div className="overflow-x-auto p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-14">
@@ -74,8 +53,8 @@ export const MainContent = () => {
                     <SearchBar />
                 </div>
 
-                <Table column={column} tableData={tableData} handleSorting={sortData} />
-                {/* <Table /> */}
+                <Table dataType="inventory"/>
+                <Table dataType="order"/>
             </div>
         </div>
     )
