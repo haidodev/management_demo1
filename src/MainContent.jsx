@@ -1,8 +1,5 @@
 import { Table } from "./Table"
-import { useState, useEffect } from "react"
 import { SearchBar } from "./SearchBar"
-import { requestForData } from "./additionalFunction"
-import { order } from "./data"
 
 export const MainContent = () => {
     return (
@@ -54,7 +51,7 @@ export const MainContent = () => {
                 </div>
 
                 <Table dataType="inventory"/>
-                <Table dataType="order"/>
+                <Table dataType="product_order"/>
             </div>
         </div>
     )

@@ -8,6 +8,12 @@ function getStatus() {
     if (tmp > 0.33) return 'Shipping';
     return 'Pending';
 }
+function getRanking() {
+    const tmp = Math.random();
+    if (tmp > 0.9) return 'Gold';
+    if (tmp > 0.7) return 'Silver';
+    return 'Bronze';
+}
 function factoryInventory(id) {
     return {
         'id': 'SP' + padWithLeadingZeros(id, 3),
@@ -38,6 +44,28 @@ function factoryOrder(id) {
         'status': getStatus(),
     }
 }
+function factoryCustomer(id) {
+    return {
+        'id': 'CU' + padWithLeadingZeros(id, 3),
+        'customer_name': genName() + ' ' + genName(),
+        'address': genName() + ' ' + genName() + ' ' + genName(),
+        'phone_number': genPhoneNumber(),
+        'ranking': getRanking(),
+    }
+}
+function factoryProductOrder(id) {
+    return {
+        'id': 'SP' + padWithLeadingZeros(id, 3),
+        'name': genName() + ' ' + genName(),
+        'price': Math.floor(Math.random() * 1000),
+        'quantity': Math.floor(Math.random() * 10),
+    }
+}
+function genPhoneNumber(){
+    let a = [48];
+    for (let i = 0; i < 9; ++i) a.push(Math.floor(Math.random() * 10) + 48);
+    return String.fromCharCode(...a)
+}
 function genName() {
     let a = [];
     for (let i = 0; i < 5; ++i) a.push(Math.floor(Math.random() * 26) + 65);
@@ -57,5 +85,21 @@ export function genOrder() {
         arr.push(factoryOrder(i));
     }
 
+    return arr;
+}
+export function genCustomer() {
+    let arr = [];
+    for (let i = 1; i <= 10; ++i) {
+        arr.push(factoryCustomer(i));
+    }
+    return arr;
+}
+export function genProductOrder() {
+    let arr = [];
+    for (let i = 1; i <= 10; ++i) {
+        let tmp = factoryProductOrder(i);
+        tmp['total'] = tmp['quantity'] * tmp['price'];
+        arr.push(tmp);
+    }
     return arr;
 }
