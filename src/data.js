@@ -1,4 +1,4 @@
-import { genCustomer, genInventory, genOrder, genProductOrder } from "./gen"
+import { genCustomer, genInventory, genOrder, genProductOrder, genProvider } from "./gen"
 const inventory = {
     tableData: genInventory(),
     column: [
@@ -40,4 +40,13 @@ const customer = {
         { label: 'Ranking', accessor: 'ranking', sortable: false },
     ]
 }
-export const data = {inventory, product_order, order, customer}
+const provider = {
+    tableData: genProvider(),
+    column: [
+        { label: 'ID', accessor: 'id', sortable: true },
+        { label: 'Provider Name', accessor: 'provider_name', sortable: true },
+        { label: 'Address', accessor: 'address', sortable: false },
+        { label: 'Phone Number', accessor: 'phone_number', sortable: false },
+    ]
+}
+export const data = {inventory, product_order, order, customer, provider}

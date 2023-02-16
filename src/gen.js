@@ -61,6 +61,14 @@ function factoryProductOrder(id) {
         'quantity': Math.floor(Math.random() * 10),
     }
 }
+function factoryProvider(id) {
+    return {
+        'id': 'PR' + padWithLeadingZeros(id, 3),
+        'provider_name': genName() + ' ' + genName(),
+        'address': genName() + ' ' + genName() + ' ' + genName(),
+        'phone_number': genPhoneNumber(),
+    }
+}
 function genPhoneNumber(){
     let a = [48];
     for (let i = 0; i < 9; ++i) a.push(Math.floor(Math.random() * 10) + 48);
@@ -91,6 +99,13 @@ export function genCustomer() {
     let arr = [];
     for (let i = 1; i <= 10; ++i) {
         arr.push(factoryCustomer(i));
+    }
+    return arr;
+}
+export function genProvider() {
+    let arr = [];
+    for (let i = 1; i <= 10; ++i) {
+        arr.push(factoryProvider(i));
     }
     return arr;
 }

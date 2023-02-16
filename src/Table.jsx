@@ -1,32 +1,40 @@
 import { TbHeader } from "./TbHeader"
 import { Tbrow } from "./TbRow"
 import { Loading } from "./Loading"
-import { useState , useEffect} from "react"
+import { useState, useEffect } from "react"
 import { requestForData } from "./additionalFunction"
+import { useSortableTable } from "./useSortableTable"
+import { data } from "./data"
 
-export const Table = ({ dataType }) => {
-    const [column, setColumn] = useState();
-    const [tableData, setTableData] = useState();
-    const sortData = (sortField, sortOrder) => {
-        if (!tableData) return;
-        if (!tableData[0].hasOwnProperty(sortField)) return;
-        const initialState = sortOrder == 'asc' ? 1 : -1;
-        setTableData(prev => {
-            return [...prev].sort((item1, item2) => {
-                if (item1[sortField] > item2[sortField]) return 1 * initialState;
-                if (item1[sortField] < item2[sortField]) return -1 * initialState;
-                return 0;
-            })
-        })
+const searchField = {
+    inventory: 'name',
+    customer: 'customer_name',
+    provider: 'provider_name',
+}
+
+export const Table = ({ dataType, searchValue, filterValue }) => {
+    console.log('rerender');
+    const column = data[dataType].column;
+    const [tableData, sortData] = useSortableTable(dataType);
+    const searchCondition = item => {
+        if (!searchValue || searchValue.length < 3) return true;
+        return item[searchField[dataType]].toLowerCase().includes(searchValue.toLowerCase());
     }
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await requestForData(dataType);
-            setColumn(data.column)
-            setTableData(data.tableData)
-        }
-        fetchData();
-    }, []);
+    const filterRanking = item => {
+        return item.ranking === filterValue;
+    }
+    const filterDate = item => {
+        const today = new Date();
+        const order_date = new Date(item.date);
+        const milisecondDiff = today - order_date;
+        const dayDiff = Math.floor(milisecondDiff / (1000 * 60 * 60 * 24));
+        return dayDiff <= filterValue;
+    }
+    const filterCondition = item => {
+        if (filterValue == 'customer') return filterRanking(item);
+        if (filterValue == 'order') return filterDate(item);
+        return true;
+    }
     return (<div>
         {
             !(column && tableData) ? <Loading /> :
@@ -36,7 +44,10 @@ export const Table = ({ dataType }) => {
 
                     </thead>
                     <tbody>
-                        {tableData.map(item => <Tbrow rowData={item} column={column} key={item.id}/>
+                        {tableData
+                        .filter(searchCondition)
+                        .filter(filterCondition)
+                        .map(item => <Tbrow rowData={item} column={column} key={item.id} />
                         )}
                     </tbody>
                 </table>
