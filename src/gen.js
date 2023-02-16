@@ -33,13 +33,13 @@ function randomDate(start, end) {
     if (dd < 10) dd = '0' + dd;
     if (mm < 10) mm = '0' + mm;
 
-    return dd + '/' + mm + '/' + yyyy;
+    return yyyy + '/' + mm + '/' + dd;
 }
 function factoryOrder(id) {
     return {
         'id': 'OR' + padWithLeadingZeros(id, 3),
         'customer_name': genName() + ' ' + genName(),
-        'date': randomDate(new Date(2020, 0, 1), new Date()),
+        'date': randomDate(new Date(2023, 0, 1), new Date()),
         'total': Math.floor(Math.random() * 500) + 500,
         'status': getStatus(),
     }
