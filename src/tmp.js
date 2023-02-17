@@ -1,4 +1,4 @@
-const num_of_rec = 10;
+const num_of_rec = 2;
 function padWithLeadingZeros(num, totalLength) {
     return String(num).padStart(totalLength, '0');
 }
@@ -80,7 +80,7 @@ function genName() {
     for (let i = 0; i < 5; ++i) a.push(Math.floor(Math.random() * 26) + 65);
     return String.fromCharCode(...a)
 }
-export function genInventory() {
+ function genInventory() {
     let arr = [];
     for (let i = 1; i <= num_of_rec; ++i) {
         arr.push(factoryInventory(i));
@@ -88,7 +88,7 @@ export function genInventory() {
 
     return arr;
 }
-export function genOrder() {
+ function genOrder() {
     let arr = [];
     for (let i = 1; i <= num_of_rec; ++i) {
         arr.push(factoryOrder(i));
@@ -96,21 +96,21 @@ export function genOrder() {
 
     return arr;
 }
-export function genCustomer() {
+ function genCustomer() {
     let arr = [];
     for (let i = 1; i <= num_of_rec; ++i) {
         arr.push(factoryCustomer(i));
     }
     return arr;
 }
-export function genProvider() {
+ function genProvider() {
     let arr = [];
     for (let i = 1; i <= num_of_rec; ++i) {
         arr.push(factoryProvider(i));
     }
     return arr;
 }
-export function genProductOrder() {
+ function genProductOrder() {
     let arr = [];
     for (let i = 1; i <= num_of_rec; ++i) {
         let tmp = factoryProductOrder(i);
@@ -119,3 +119,69 @@ export function genProductOrder() {
     }
     return arr;
 }
+
+const inventory = {
+    tableData: genInventory(),
+    column: [
+        { label: 'ID', accessor: 'id', sortable: true },
+        { label: 'Name', accessor: 'name', sortable: true },
+        { label: 'Price In', accessor: 'price_in', sortable: true },
+        { label: 'Price Out', accessor: 'price_out', sortable: true },
+        { label: 'Sold', accessor: 'sold', sortable: true },
+        { label: 'Quantity', accessor: 'quantity', sortable: true },
+    ]
+}
+const product_order = {
+    tableData: genProductOrder(),
+    column: [
+        { label: 'ID', accessor: 'id', sortable: true },
+        { label: 'Name', accessor: 'name', sortable: true },
+        { label: 'Price', accessor: 'price', sortable: true },
+        { label: 'Quantity', accessor: 'quantity', sortable: true },
+        { label: 'Total', accessor: 'total', sortable: true },
+    ]
+}
+const order = {
+    tableData: genOrder(),
+    column: [
+        { label: 'ID', accessor: 'id', sortable: true },
+        { label: 'Customer Name', accessor: 'customer_name', sortable: true },
+        { label: 'Date', accessor: 'date', sortable: true },
+        { label: 'Total', accessor: 'total', sortable: true },
+        { label: 'Status', accessor: 'status', sortable: false },
+    ]
+}
+const customer = {
+    tableData: genCustomer(),
+    column: [
+        { label: 'ID', accessor: 'id', sortable: true },
+        { label: 'Customer Name', accessor: 'customer_name', sortable: true },
+        { label: 'Address', accessor: 'address', sortable: false },
+        { label: 'Phone Number', accessor: 'phone_number', sortable: false },
+        { label: 'Ranking', accessor: 'ranking', sortable: false },
+    ]
+}
+const provider = {
+    tableData: genProvider(),
+    column: [
+        { label: 'ID', accessor: 'id', sortable: true },
+        { label: 'Provider Name', accessor: 'provider_name', sortable: true },
+        { label: 'Address', accessor: 'address', sortable: false },
+        { label: 'Phone Number', accessor: 'phone_number', sortable: false },
+    ]
+}
+const data = {inventory, product_order, order, customer, provider}
+
+const fs = require('fs');
+const content = [];
+[genCustomer, genInventory, genOrder, genProductOrder, genProvider]
+.forEach(item => {
+    content.push(item());
+})
+console.log(content)
+    fs.writeFile('./sample', JSON.stringify(content, null, 4), err => {
+        if (err) {
+          console.error(err);
+        }
+      });
+
