@@ -23,7 +23,6 @@ const requiredFilter = [
 
 export const Table = ({ dataType }) => {
     const column = data[dataType].column;
-
     const [tableData, sortData] = useSortableTable(dataType);
     const [setFilterValue, filterCondition] = useFilter(dataType)
     const [inputField, handleInputChange, searchCondition] = useSearchBar(dataType);

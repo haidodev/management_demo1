@@ -18,6 +18,7 @@ export const useSortableTable = (dataType) => {
     }
     useEffect(() => {
         //comment out from here
+        setTableData(null);
         const fetchData = async () => {
             const data = await requestForData(dataType);
             setTableData(data.tableData)
@@ -25,7 +26,8 @@ export const useSortableTable = (dataType) => {
         fetchData();
         //to here
         //and uncomment this line below
-        //setTableData(fetchData);
-    }, []);
+        //fetchData(dataType).then(...)
+        //setTableData();
+    }, [dataType]);
     return [tableData, sortData];
 }

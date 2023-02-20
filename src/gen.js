@@ -70,6 +70,14 @@ function factoryProvider(id) {
         'phone_number': genPhoneNumber(),
     }
 }
+function factoryImport(id) {
+    return {
+        'id': 'IP' + padWithLeadingZeros(id, 3),
+        'provider_name': genName() + ' ' + genName(),
+        'date': randomDate(new Date(2023, 0, 1), new Date()),
+        'total': Math.floor(Math.random() * 500) + 500,
+    }
+}
 function genPhoneNumber(){
     let a = [48];
     for (let i = 0; i < 9; ++i) a.push(Math.floor(Math.random() * 10) + 48);
@@ -115,6 +123,14 @@ export function genProductOrder() {
     for (let i = 1; i <= num_of_rec; ++i) {
         let tmp = factoryProductOrder(i);
         tmp['total'] = tmp['quantity'] * tmp['price'];
+        arr.push(tmp);
+    }
+    return arr;
+}
+export function genImport() {
+    let arr = [];
+    for (let i = 1; i <= num_of_rec; ++i) {
+        let tmp = factoryImport(i);
         arr.push(tmp);
     }
     return arr;

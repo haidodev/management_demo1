@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { BsFillClockFill, BsPiggyBankFill } from "react-icons/bs";
@@ -44,8 +44,12 @@ export const FilterButton = ({ dataType, setFilterValue }) => {
     const [filterLabel, setFilterLabel] = useState(preset[dataType].default);
     const handleClick = (item) => {
         setFilterValue(item.value);
-        setFilterLabel(item.label);
+        setFilterLabelite(item.value);
     }
+    useEffect(() => {
+        setFilterValue(null);
+        setFilterLabel(preset[dataType].default);
+    }, [dataType]);
     return (
         <Menu as="div" className="relative inline-block text-left">
             <div>
@@ -67,10 +71,9 @@ export const FilterButton = ({ dataType, setFilterValue }) => {
             >
                 <Menu.Items className="absolute left-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="py-1">
-                        {preset[dataType].tmp.map(item => <Menu.Item>
+                        {preset[dataType].tmp.map(item => <Menu.Item key={item.value}>
                             {({ active }) => (
                                 <p
-                                    key={item.value}
                                     onClick={() => handleClick(item)}
                                     className={classNames(
                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
