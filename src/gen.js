@@ -47,7 +47,7 @@ function factoryOrder(id) {
 }
 function factoryCustomer(id) {
     return {
-        'id': 'CU' + padWithLeadingZeros(id, 3),
+        'id': 'CS' + padWithLeadingZeros(id, 3),
         'customer_name': genName() + ' ' + genName(),
         'address': genName() + ' ' + genName() + ' ' + genName(),
         'phone_number': genPhoneNumber(),

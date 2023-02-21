@@ -7,7 +7,7 @@ import { FilterButton } from "./FilterButton"
 import { SearchBar } from "./SearchBar"
 import { useFilter } from "./useFilter"
 import { useSearchBar } from "./useSearchBar"
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 const requiredSearchBar = [
     'inventory',
     'customer',
@@ -22,11 +22,14 @@ const requiredFilter = [
 ];
 
 export const Table = ({ dataType }) => {
+    const navigate = useNavigate();
     const column = data[dataType].column;
     const [tableData, sortData] = useSortableTable(dataType);
     const [setFilterValue, filterCondition] = useFilter(dataType)
     const [inputField, handleInputChange, searchCondition] = useSearchBar(dataType);
-
+    const handleRowClick = (id) => {
+        navigate(`/${dataType}/${id}`);
+    }
     return (<>
         <div class="flex items-center justify-between pb-4">
             {requiredFilter.includes(dataType) && <FilterButton dataType={dataType} setFilterValue={setFilterValue} />}
@@ -42,7 +45,7 @@ export const Table = ({ dataType }) => {
                         {tableData
                             .filter(searchCondition)
                             .filter(filterCondition)
-                            .map(item => <Tbrow rowData={item} column={column} key={item.id} />
+                            .map(item => <Tbrow rowData={item} column={column} key={item.id} onClick={handleRowClick} />
                             )}
                     </tbody>
                 </table>

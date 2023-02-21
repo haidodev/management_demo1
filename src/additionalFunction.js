@@ -5,5 +5,8 @@ export const requestForData = (dataType) => new Promise(resolve => {
     }, 1000);
 });
 export const fetchCustomerData = async (customerId) => {
-    
+
+}
+export const updateCustomer = async (id, data) => {
+    return true;
 }

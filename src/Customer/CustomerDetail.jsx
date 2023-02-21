@@ -1,7 +1,8 @@
 import { Table } from "../Table";
 import { getData } from "./customer";
-import { useLoaderData, Link, useLocation } from "react-router-dom";
+import { useLoaderData, Link, useNavigate } from "react-router-dom";
 import { EditIcon } from "../icon";
+
 export const loader = async ({ params }) => {
     const data = await getData(params.customerId);
     return data;
