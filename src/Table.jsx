@@ -7,6 +7,7 @@ import { FilterButton } from "./FilterButton"
 import { SearchBar } from "./SearchBar"
 import { useFilter } from "./useFilter"
 import { useSearchBar } from "./useSearchBar"
+import { Link } from "react-router-dom"
 const requiredSearchBar = [
     'inventory',
     'customer',

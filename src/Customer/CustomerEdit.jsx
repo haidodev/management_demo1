@@ -1,19 +1,13 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import {useLoaderData} from "react-router-dom"; 
 
-const customer_infor = {
-  name: 'Hai Do Hong',
-  customer_id: 'CU001',
-  email: 'hai.dh@gmail.com',
-  phone_number: '0866187607',
-  address: 'Ha Noi, Viet Nam',
-  ranking: 'Gold',
-}
 
 export const CustomerEdit = () => {
+  const customer_infor = useLoaderData();
+
   const [email, setEmail] = useState(customer_infor.email)
   const [phoneNumber, setPhoneNumber] = useState(customer_infor.phone_number)
-  const [ranking, setRanking] = useState(customer_infor.ranking);
   const [address, setAddress] = useState(customer_infor.address);
   const handleEmailChange = ({ target }) => {
     setEmail(target.value);
@@ -42,15 +36,6 @@ export const CustomerEdit = () => {
         <div class="mb-6">
           <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
           <input type="text" id="address" value={address} onChange={handleAddressChange} class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
-        </div>
-        <div className="mb-6">
-          <label for="ranking" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
-          <select id="ranking" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-            <option selected>{ranking}</option>
-            {ranking != 'Bonze' && <option value="bronze">Bronze</option>}
-            {ranking != 'Silver' && <option value="silver">Silver</option>}
-            {ranking != 'Gold' && <option value="gold">Gold</option>}
-          </select>
         </div>
         <div class="flex items-start mb-6">
           <div class="flex items-center h-5">

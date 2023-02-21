@@ -9,7 +9,10 @@ import {
 import App from './App';
 import { ErrorPage } from "./ErrorPage";
 import { OrderDetail } from './OrderDetail';
-import { CustomerDetail } from './Customer/CustomerDetail';
+import { 
+  CustomerDetail,
+  loader as customerLoader
+} from './Customer/CustomerDetail';
 import { CustomerEdit } from './Customer/CustomerEdit';
 import { ProviderDetail } from './Provider/ProviderDetail';
 
@@ -45,12 +48,14 @@ const router = createBrowserRouter([
         element: <OrderDetail />,
       },
       {
-        path: "customer/:customer_num",
+        path: "customer/:customerId",
         element: <CustomerDetail />,
+        loader: customerLoader
       },
       {
-        path: "customer/:customer_num/edit",
+        path: "customer/:customerId/edit",
         element: <CustomerEdit />,
+        loader: customerLoader
       },
       {
         path: "provider/:provider_id",
