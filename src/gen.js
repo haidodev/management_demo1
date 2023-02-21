@@ -59,7 +59,7 @@ function factoryProductOrder(id) {
         'id': 'SP' + padWithLeadingZeros(id, 3),
         'name': genName() + ' ' + genName(),
         'price': Math.floor(Math.random() * 1000),
-        'quantity': Math.floor(Math.random() * 10),
+        'quantity': Math.floor(Math.random() * 10) + 1,
     }
 }
 function factoryProvider(id) {
@@ -74,6 +74,7 @@ function factoryImport(id) {
     return {
         'id': 'IP' + padWithLeadingZeros(id, 3),
         'provider_name': genName() + ' ' + genName(),
+        'phone_number': genPhoneNumber(),
         'date': randomDate(new Date(2023, 0, 1), new Date()),
         'total': Math.floor(Math.random() * 500) + 500,
     }
@@ -127,7 +128,7 @@ export function genProductOrder() {
     }
     return arr;
 }
-export function genImport() {
+export function genImportProduct() {
     let arr = [];
     for (let i = 1; i <= num_of_rec; ++i) {
         let tmp = factoryImport(i);

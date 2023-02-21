@@ -21,6 +21,20 @@ const preset = {
         ],
         default: 'Select Time Stamp'
     },
+    import_product: {
+        icon: <BsFillClockFill className='w-4 h-4 mr-2 text-gray-400'/>,
+        options: [
+            'Last day',
+            'Last 7 days',
+            'Last 30 days'
+        ],
+        tmp: [
+            { label: 'Last days', value: 1 },
+            { label: 'Last 7 days', value: 7 },
+            { label: 'Last 30 days', value: 30 },
+        ],
+        default: 'Select Time Stamp'
+    },
     customer: {
         icon: <BsPiggyBankFill className='w-4 h-4 mr-2 text-gray-400'/>,
         options: [

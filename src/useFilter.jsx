@@ -18,7 +18,7 @@ export const useFilter = (dataType) => {
     const filterCondition = item => {
         if (!filterValue) return true;
         if (dataType == 'customer') return filterRanking(item, filterValue);
-        if (dataType == 'order') return filterDate(item, filterValue);
+        if (dataType == 'order' || dataType == 'import_product') return filterDate(item, filterValue);
         return true;
     }
     return [setFilterValue, filterCondition];

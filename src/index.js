@@ -8,6 +8,10 @@ import {
 } from "react-router-dom";
 import App from './App';
 import { ErrorPage } from "./ErrorPage";
+import { OrderDetail } from './OrderDetail';
+import { CustomerDetail } from './Customer/CustomerDetail';
+import { CustomerEdit } from './Customer/CustomerEdit';
+import { ProviderDetail } from './Provider/ProviderDetail';
 
 
 const router = createBrowserRouter([
@@ -33,8 +37,24 @@ const router = createBrowserRouter([
         element: <MainContent />,
       },
       {
-        path: "import",
+        path: "import_product",
         element: <MainContent />,
+      },
+      {
+        path: "order/:ord_num",
+        element: <OrderDetail />,
+      },
+      {
+        path: "customer/:customer_num",
+        element: <CustomerDetail />,
+      },
+      {
+        path: "customer/:customer_num/edit",
+        element: <CustomerEdit />,
+      },
+      {
+        path: "provider/:provider_id",
+        element: <ProviderDetail />,
       },
     ]
   }

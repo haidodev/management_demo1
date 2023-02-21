@@ -4,6 +4,7 @@ const searchField = {
     inventory: 'name',
     customer: 'customer_name',
     provider: 'provider_name',
+    import_product: 'provider_name'
 }
 export const useSearchBar = (dataType) => {
     const [inputField, setInputField] = useState('');

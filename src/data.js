@@ -1,4 +1,4 @@
-import { genCustomer, genInventory, genOrder, genProductOrder, genProvider } from "./gen"
+import { genCustomer, genInventory, genOrder, genProductOrder, genProvider, genImportProduct } from "./gen"
 const inventory = {
     tableData: genInventory(),
     column: [
@@ -49,4 +49,32 @@ const provider = {
         { label: 'Phone Number', accessor: 'phone_number', sortable: false },
     ]
 }
-export const data = {inventory, product_order, order, customer, provider}
+const import_product = {
+    tableData: genImportProduct(),
+    column: [
+        { label: 'ID', accessor: 'id', sortable: true },
+        { label: 'Provider Name', accessor: 'provider_name', sortable: true },
+        { label: 'Phone Number', accessor: 'phone_number', sortable: false },
+        { label: 'Date', accessor: 'date', sortable: true },
+        { label: 'Total', accessor: 'total', sortable: true },
+    ]
+}
+const import_product_provider = {
+    tableData: genImportProduct(),
+    column: [
+        { label: 'ID', accessor: 'id', sortable: true },
+        { label: 'Date', accessor: 'date', sortable: true },
+        { label: 'Total', accessor: 'total', sortable: true },
+    ]
+}
+const order_customer = {
+    tableData: genOrder(),
+    column: [
+        { label: 'ID', accessor: 'id', sortable: true },
+        { label: 'Date', accessor: 'date', sortable: true },
+        { label: 'Total', accessor: 'total', sortable: true },
+        { label: 'Status', accessor: 'status', sortable: false },
+    ]
+}
+
+export const data = {inventory, product_order, order, customer, provider, import_product, order_customer, import_product_provider}

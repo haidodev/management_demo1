@@ -7,18 +7,17 @@ import { FilterButton } from "./FilterButton"
 import { SearchBar } from "./SearchBar"
 import { useFilter } from "./useFilter"
 import { useSearchBar } from "./useSearchBar"
-
-
-
 const requiredSearchBar = [
     'inventory',
     'customer',
     'provider',
+    'import_product',
 ];
 
 const requiredFilter = [
     'order',
     'customer',
+    'import_product',
 ];
 
 export const Table = ({ dataType }) => {
@@ -27,7 +26,7 @@ export const Table = ({ dataType }) => {
     const [setFilterValue, filterCondition] = useFilter(dataType)
     const [inputField, handleInputChange, searchCondition] = useSearchBar(dataType);
 
-    return (<div>
+    return (<>
         <div class="flex items-center justify-between pb-4">
             {requiredFilter.includes(dataType) && <FilterButton dataType={dataType} setFilterValue={setFilterValue} />}
             {requiredSearchBar.includes(dataType) && <SearchBar input={inputField} handleInputChange={handleInputChange} />}
@@ -47,6 +46,6 @@ export const Table = ({ dataType }) => {
                     </tbody>
                 </table>
         }
-    </div>
+    </>
     )
 }
