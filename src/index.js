@@ -18,7 +18,7 @@ import { CustomerNew, action as customerNew, loader as CustomerNewId } from './C
 import { action as customerDelete } from './Customer/CustomerDelete';
 import { ProviderDetail, loader as providerLoader} from './Provider/ProviderDetail';
 import { ProviderEdit, action as providerEdit} from './Provider/ProviderEdit';
-import { ProviderNew, action as providerNew } from './Provider/ProviderNew';
+import { ProviderNew, loader as providerNewId, action as providerNew } from './Provider/ProviderNew';
 import { action as providerDelete } from './Provider/ProviderDelete';
 
 
@@ -81,8 +81,8 @@ const router = createBrowserRouter([
       {
         path: "provider/new",
         element: <ProviderNew />,
-        loader: providerNew,
-        action: providerEdit
+        loader: providerNewId,
+        action: providerNew
       },
       {
         path: "provider/:providerId/edit",
