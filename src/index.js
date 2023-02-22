@@ -14,9 +14,9 @@ import {
   loader as customerLoader
 } from './Customer/CustomerDetail';
 import { CustomerEdit, action as customerEdit } from './Customer/CustomerEdit';
+import { CustomerNew, action as customerNew, loader as CustomerNewId } from './Customer/CustomerNew';
 import { ProviderDetail } from './Provider/ProviderDetail';
 import {ProviderEdit, } from './Provider/ProviderEdit'
-
 
 const router = createBrowserRouter([
   {
@@ -52,6 +52,12 @@ const router = createBrowserRouter([
         path: "customer/:customerId",
         element: <CustomerDetail />,
         loader: customerLoader
+      },
+      {
+        path: "customer/new",
+        element: <CustomerNew />,
+        action: customerNew,
+        loader: CustomerNewId
       },
       {
         path: "customer/:customerId/edit",

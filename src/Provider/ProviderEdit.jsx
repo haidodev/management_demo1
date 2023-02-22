@@ -1,68 +1,25 @@
-import {
-    Form,
-    useLoaderData,
-    redirect,
-    useNavigate,
-} from "react-router-dom";
+import { useState } from "react"
+import { Link } from "react-router-dom"
+import { useLoaderData, redirect } from "react-router-dom";
+import { updateCustomer } from "../additionalFunction";
+import { InformationForm } from "../InformationForm";
 
+export async function action({ request, params }) {
+  const formData = await request.formData();
+  const updates = Object.fromEntries(formData);
+  console.log(updates);
+  await updateCustomer(params.customerId, updates);
+  return redirect(`/customer/${params.customerId}`);
+}
 export const ProviderEdit = () => {
-    const contact = useLoaderData();
-    const navigate = useNavigate();
-    return (
-        <Form method="post" id="contact-form">
-            <p>
-                <span>Name</span>
-                <input
-                    placeholder="First"
-                    aria-label="First name"
-                    type="text"
-                    name="first"
-                    defaultValue={contact.first}
-                />
-                <input
-                    placeholder="Last"
-                    aria-label="Last name"
-                    type="text"
-                    name="last"
-                    defaultValue={contact.last}
-                />
-            </p>
-            <label>
-                <span>Twitter</span>
-                <input
-                    type="text"
-                    name="twitter"
-                    placeholder="@jack"
-                    defaultValue={contact.twitter}
-                />
-            </label>
-            <label>
-                <span>Avatar URL</span>
-                <input
-                    placeholder="https://example.com/avatar.jpg"
-                    aria-label="Avatar URL"
-                    type="text"
-                    name="avatar"
-                    defaultValue={contact.avatar}
-                />
-            </label>
-            <label>
-                <span>Notes</span>
-                <textarea
-                    name="notes"
-                    defaultValue={contact.notes}
-                    rows={6}
-                />
-            </label>
-            <p>
-                <button type="submit">Save</button>
-                <button
-                    type="button"
-                    onClick={() => {
-                        navigate(-1);
-                    }}
-                >Cancel</button>
-            </p>
-        </Form>
-    );
+  const customer_infor = useLoaderData();
+  return (
+    <>
+      <h1 className="text-xl font-semibold mb-2">
+        Edit the information for the customer:
+        <Link to={`/customer/${customer_infor.customer_id}`}> <span className="underline decoration-sky-500">{customer_infor.customer_id}</span></Link>
+      </h1>
+      <InformationForm customer_infor={customer_infor} />
+    </>
+  )
 }

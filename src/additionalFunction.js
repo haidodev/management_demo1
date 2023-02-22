@@ -10,3 +10,9 @@ export const fetchCustomerData = async (customerId) => {
 export const updateCustomer = async (id, data) => {
     return true;
 }
+export const addingCustomer = async (data) => {
+    return true;
+}
+export const genNewCustomerID = async () => {
+    return 'CS009';
+}

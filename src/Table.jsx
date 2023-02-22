@@ -8,6 +8,7 @@ import { SearchBar } from "./SearchBar"
 import { useFilter } from "./useFilter"
 import { useSearchBar } from "./useSearchBar"
 import { useNavigate } from "react-router-dom"
+import { AddingNewRow } from "./AddingNewRow"
 const requiredSearchBar = [
     'inventory',
     'customer',
@@ -47,6 +48,7 @@ export const Table = ({ dataType }) => {
                             .filter(filterCondition)
                             .map(item => <Tbrow rowData={item} column={column} key={item.id} onClick={handleRowClick} />
                             )}
+                        <AddingNewRow column={column} onClick={handleRowClick}/>
                     </tbody>
                 </table>
         }
