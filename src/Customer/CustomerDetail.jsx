@@ -1,6 +1,6 @@
 import { Table } from "../Table";
 import { getData } from "./customer";
-import { useLoaderData, Link, useNavigate } from "react-router-dom";
+import { useLoaderData, Link, Form } from "react-router-dom";
 import { XMarkIcon, PencilSquareIcon } from '@heroicons/react/20/solid'
 
 
@@ -20,14 +20,29 @@ export const CustomerDetail = () => {
             <h2 className="text-lg text-gray-500 dark:text-gray-400">Customer ID: {customer_infor.customer_id.toUpperCase()}</h2>
             <h2 className="text-lg text-gray-500 dark:text-gray-400">Ranking: {customer_infor.ranking}</h2>
             <div className="mb-4"></div>
-            <Link to={`${location.pathname}/edit`} className="inline-flex items-center text-gray-500 justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+            <div className="flex">
+                <Form action="edit">
+                    <button type="submit" className="inline-flex items-center text-gray-500 justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                        <PencilSquareIcon className="h-5 w-5" />
+                        <h1 className="ml-2">Edit</h1>
+                    </button>
+                </Form>
+                <Form action="delete">
+                    <button type="submit" method="post" className="inline-flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 text-center mr-5 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
+                        <XMarkIcon className="w-5 h-5" />
+                        <h1 className="ml-2">Delete</h1>
+                    </button>
+                </Form>
+            </div>
+
+            {/* <Link to={`${location.pathname}/edit`} className="inline-flex items-center text-gray-500 justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                 <PencilSquareIcon className="h-5 w-5" />
                 <h1 className="ml-2">Edit</h1>
             </Link>
             <Link to={`${location.pathname}/delete`} className="inline-flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 text-center mr-5 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                <XMarkIcon className="w-5 h-5"/>
+                <XMarkIcon className="w-5 h-5" />
                 <h1 className="ml-2">Delete</h1>
-            </Link>
+            </Link> */}
         </div>
 
         <h2 className="mt-2 text-2xl font-semibold">Recent Order</h2>
