@@ -15,8 +15,12 @@ import {
 } from './Customer/CustomerDetail';
 import { CustomerEdit, action as customerEdit } from './Customer/CustomerEdit';
 import { CustomerNew, action as customerNew, loader as CustomerNewId } from './Customer/CustomerNew';
-import { ProviderDetail } from './Provider/ProviderDetail';
-import {ProviderEdit, } from './Provider/ProviderEdit'
+import { action as customerDelete } from './Customer/CustomerDelete';
+import { ProviderDetail, loader as providerLoader} from './Provider/ProviderDetail';
+import { ProviderEdit, action as providerEdit} from './Provider/ProviderEdit';
+import { ProviderNew, action as providerNew } from './Provider/ProviderNew';
+import { action as providerDelete } from './Provider/ProviderDelete';
+
 
 const router = createBrowserRouter([
   {
@@ -66,12 +70,29 @@ const router = createBrowserRouter([
         action: customerEdit
       },
       {
+        path: "customer/:customerId/delete",
+        action: customerDelete
+      },
+      {
         path: "provider/:providerId",
         element: <ProviderDetail />,
+        loader: providerLoader
+      },
+      {
+        path: "provider/new",
+        element: <ProviderNew />,
+        loader: providerNew,
+        action: providerEdit
       },
       {
         path: "provider/:providerId/edit",
         element: <ProviderEdit />,
+        loader: providerLoader,
+        action: providerEdit
+      },
+      {
+        path: "provider/:providerId/delete",
+        action: providerDelete
       },
     ]
   }

@@ -13,6 +13,21 @@ export const updateCustomer = async (id, data) => {
 export const addingCustomer = async (data) => {
     return true;
 }
+export const deleteCustomer = async (data) => {
+    return true;
+}
 export const genNewCustomerID = async () => {
     return 'CS009';
+}
+export const updateProvider = async (id, data) => {
+    return true;
+}
+export const addingProvider = async (data) => {
+    return true;
+}
+export const genNewProviderID = async () => {
+    return 'CS009';
+}
+export const deleteProvider = async (data) => {
+    return true;
 }

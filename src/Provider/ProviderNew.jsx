@@ -1,29 +1,28 @@
 import { useState } from "react"
 import { redirect, useLoaderData } from "react-router-dom";
-import { updateCustomer, genNewCustomerID } from "../additionalFunction";
+import { updateProvider, genNewProviderID } from "../additionalFunction";
 import { InformationForm } from "../InformationForm";
 
 export async function action({ request }) {
     const formData = await request.formData();
     const updates = Object.fromEntries(formData);
     console.log(updates);
-    await updateCustomer(updates);
-    return redirect(`/customer/${updates.customerId}`);
+    await updateProvider(updates);
+    return redirect(`/provider/${updates.providerId}`);
 }
 //Khoa gen cai id roi thay vao cai ham duoi nay nay, no tra ve id la duoc
 export const loader = async () => {
-    const id = await genNewCustomerID();
+    const id = await genNewProviderID();
     return id;
 }
-export const CustomerNew = () => {
-    const customerId = useLoaderData();
-    console.log(customerId);
+export const ProviderNew = () => {
+    const providerId = useLoaderData();
     return (
         <>
             <h1 className="text-xl font-semibold mb-2">
-                Adding a new customer:
+                Adding a new provider:
             </h1>
-            <InformationForm infor={{customerId}}/>
+            <InformationForm infor={{providerId}}/>
 
         </>
 

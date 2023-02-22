@@ -19,7 +19,7 @@ export const CustomerEdit = () => {
         Edit the information for the customer:
         <Link to={`/customer/${customer_infor.customer_id}`}> <span className="underline decoration-sky-500">{customer_infor.customer_id}</span></Link>
       </h1>
-      <InformationForm customer_infor={customer_infor} />
+      <InformationForm infor={customer_infor} />
     </>
   )
 }

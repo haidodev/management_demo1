@@ -8,18 +8,18 @@ export async function action({ request, params }) {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
   console.log(updates);
-  await updateCustomer(params.customerId, updates);
-  return redirect(`/customer/${params.customerId}`);
+  await updateCustomer(params.providerId, updates);
+  return redirect(`/provider/${params.providerId}`);
 }
 export const ProviderEdit = () => {
-  const customer_infor = useLoaderData();
+  const provider_infor = useLoaderData();
   return (
     <>
       <h1 className="text-xl font-semibold mb-2">
-        Edit the information for the customer:
-        <Link to={`/customer/${customer_infor.customer_id}`}> <span className="underline decoration-sky-500">{customer_infor.customer_id}</span></Link>
+        Edit the information for the provider:
+        <Link to={`/provider/${provider_infor.provider_id}`}> <span className="underline decoration-sky-500">{provider_infor.provider_id}</span></Link>
       </h1>
-      <InformationForm customer_infor={customer_infor} />
+      <InformationForm infor={provider_infor} />
     </>
   )
 }

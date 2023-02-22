@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { Form, useNavigate } from 'react-router-dom'
 
-export const InformationForm = ({ customer_infor }) => {
-    console.log(customer_infor)
+export const InformationForm = ({ infor }) => {
     const navigate = useNavigate();
-    const [email, setEmail] = useState(customer_infor.email)
-    const [phoneNumber, setPhoneNumber] = useState(customer_infor.phone_number)
-    const [address, setAddress] = useState(customer_infor.address);
+    const [email, setEmail] = useState(infor.email)
+    const [phoneNumber, setPhoneNumber] = useState(infor.phone_number)
+    const [address, setAddress] = useState(infor.address);
     const handleEmailChange = ({ target }) => {
         setEmail(target.value);
     }
@@ -17,9 +16,14 @@ export const InformationForm = ({ customer_infor }) => {
         setAddress(target.value);
     }
     return (<Form method="post" >
-        {customer_infor.customerId && <div class="mb-6">
+        {infor.customerId && <div class="mb-6">
             <label for="customerId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer ID</label>
-            <input type="text" id="customerId" name="customerId" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={customer_infor.customerId} readOnly />
+            <input type="text" id="customerId" name="customerId" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={infor.customerId} readOnly />
+        </div>}
+
+        {infor.providerId && <div class="mb-6">
+            <label for="providerId" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">provider ID</label>
+            <input type="text" id="providerId" name="providerId" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={infor.providerId} readOnly />
         </div>}
 
         <div class="mb-6">
