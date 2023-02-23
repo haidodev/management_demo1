@@ -10,7 +10,17 @@ const inventory = {
         { label: 'Quantity', accessor: 'quantity', sortable: true },
     ]
 }
-const product_order = {
+const orderDetail = {
+    tableData: genProductOrder(),
+    column: [
+        { label: 'ID', accessor: 'id', sortable: true },
+        { label: 'Name', accessor: 'name', sortable: true },
+        { label: 'Price', accessor: 'price', sortable: true },
+        { label: 'Quantity', accessor: 'quantity', sortable: true },
+        { label: 'Total', accessor: 'total', sortable: true },
+    ]
+}
+const importDetail = {
     tableData: genProductOrder(),
     column: [
         { label: 'ID', accessor: 'id', sortable: true },
@@ -49,7 +59,7 @@ const provider = {
         { label: 'Phone Number', accessor: 'phone_number', sortable: false },
     ]
 }
-const import_product = {
+const _import = {
     tableData: genImportProduct(),
     column: [
         { label: 'ID', accessor: 'id', sortable: true },
@@ -59,7 +69,7 @@ const import_product = {
         { label: 'Total', accessor: 'total', sortable: true },
     ]
 }
-const import_product_provider = {
+const importFromProvider = {
     tableData: genImportProduct(),
     column: [
         { label: 'ID', accessor: 'id', sortable: true },
@@ -67,7 +77,7 @@ const import_product_provider = {
         { label: 'Total', accessor: 'total', sortable: true },
     ]
 }
-const order_customer = {
+const orderFromCustomer = {
     tableData: genOrder(),
     column: [
         { label: 'ID', accessor: 'id', sortable: true },
@@ -77,4 +87,4 @@ const order_customer = {
     ]
 }
 
-export const data = {inventory, product_order, order, customer, provider, import_product, order_customer, import_product_provider}
+export const data = {inventory, orderDetail, order, customer, provider, _import, orderFromCustomer, importFromProvider, importDetail}

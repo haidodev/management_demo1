@@ -1,6 +1,9 @@
 import { Table } from "../Table/Table";
 import { useLoaderData, Form, Link } from "react-router-dom";
 import { XMarkIcon, PencilSquareIcon } from '@heroicons/react/20/solid'
+import { requestForData } from "../additionalFunction";
+
+
 export const loader = async ({ params }) => {
     const getData = async (id) => {
         const order_infor = {
@@ -12,16 +15,16 @@ export const loader = async ({ params }) => {
         }
         return order_infor;
     }
-    const data = await getData(params.customerId);
-
-    return data;
+    const order_infor = await getData(params.customerId);
+    const {tableData} = await requestForData('orderDetail');
+    return {order_infor, tableData};
 }
 
 
 
 
 export const OrderDetail = () => {
-    const order_infor = useLoaderData();
+    const {order_infor, tableData} = useLoaderData();
     return <div>
         <div className="pb-4 mb-8 border-b border-gray-200 dark:border-gray-800">
             <h1 className="text-3xl font-bold uppercase mb-2">ORDER: #{order_infor.order_id}</h1>
@@ -62,7 +65,7 @@ export const OrderDetail = () => {
             </div>
         </div>
         <h2 className="mt-2 text-2xl font-semibold">Product detail: </h2>
-        <Table dataType="product_order"></Table>
+        <Table dataType="orderDetail" _tableData={tableData}></Table>
     </div>
 
 }

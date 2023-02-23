@@ -31,9 +31,10 @@ const requiredAddingNewRow = [
     'inventory'
 ];
 const requireTotalRow = [
-    'import_detail',
-    'product_order'
+    'importDetail',
+    'orderDetail'
 ]
+
 export const Table = ({ dataType, _tableData }) => {
     const navigate = useNavigate();
     const column = data[dataType].column;
@@ -43,8 +44,7 @@ export const Table = ({ dataType, _tableData }) => {
     const handleRowClick = (id) => {
         navigate(`/${dataType}/${id}`);
     }
-    console.log(_tableData);
-    console.log(tableData);
+
     return (<>
         <div class="flex items-center justify-between pb-4">
             {requiredFilter.includes(dataType) && <FilterButton dataType={dataType} setFilterValue={setFilterValue} />}
