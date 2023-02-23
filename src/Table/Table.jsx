@@ -1,14 +1,15 @@
-import { TbHeader } from "./TbHeader"
-import { Tbrow } from "./TbRow"
+import { TableHeaderRow } from "./TableHeaderRow"
+import { TableDataRow } from "./TableDataRow"
 import { Loading } from "./Loading"
 import { useSortableTable } from "./useSortableTable"
-import { data } from "./data"
+import { data } from "../data"
 import { FilterButton } from "./FilterButton"
 import { SearchBar } from "./SearchBar"
 import { useFilter } from "./useFilter"
 import { useSearchBar } from "./useSearchBar"
 import { useNavigate } from "react-router-dom"
-import { AddingNewRow } from "./AddingNewRow"
+import { TableNewRow } from "./TableNewRow"
+import { TableTotalRow } from "./TableTotalRow"
 const requiredSearchBar = [
     'inventory',
     'customer',
@@ -22,15 +23,28 @@ const requiredFilter = [
     'import_product',
 ];
 
-export const Table = ({ dataType }) => {
+const requiredAddingNewRow = [
+    'order',
+    'customer',
+    'import_product',
+    'provider',
+    'inventory'
+];
+const requireTotalRow = [
+    'import_detail',
+    'product_order'
+]
+export const Table = ({ dataType, _tableData }) => {
     const navigate = useNavigate();
     const column = data[dataType].column;
-    const [tableData, sortData] = useSortableTable(dataType);
+    const [tableData, sortData] = useSortableTable(_tableData);
     const [setFilterValue, filterCondition] = useFilter(dataType)
     const [inputField, handleInputChange, searchCondition] = useSearchBar(dataType);
     const handleRowClick = (id) => {
         navigate(`/${dataType}/${id}`);
     }
+    console.log(_tableData);
+    console.log(tableData);
     return (<>
         <div class="flex items-center justify-between pb-4">
             {requiredFilter.includes(dataType) && <FilterButton dataType={dataType} setFilterValue={setFilterValue} />}
@@ -40,16 +54,20 @@ export const Table = ({ dataType }) => {
             !(column && tableData) ? <Loading /> :
                 <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                        <TbHeader headerList={column} handleSorting={sortData} />
+                        <TableHeaderRow headerList={column} handleSorting={sortData} />
                     </thead>
                     <tbody>
                         {tableData
                             .filter(searchCondition)
                             .filter(filterCondition)
-                            .map(item => <Tbrow rowData={item} column={column} key={item.id} onClick={handleRowClick} />
+                            .map(item => <TableDataRow rowData={item} column={column} key={item.id} onClick={handleRowClick} />
                             )}
-                        <AddingNewRow column={column} onClick={handleRowClick}/>
                     </tbody>
+                    <tfoot class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                        {requiredAddingNewRow.includes(dataType) && <TableNewRow column={column} onClick={handleRowClick}/>}
+                        {requireTotalRow.includes(dataType) && <TableTotalRow column={column} tableData={tableData}/>}
+                    </tfoot>
+
                 </table>
         }
     </>

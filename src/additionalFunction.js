@@ -31,3 +31,42 @@ export const genNewProviderID = async () => {
 export const deleteProvider = async (data) => {
     return true;
 }
+//
+export const updateOrder = async (id, data) => {
+    return true;
+}
+export const addingOrder = async (data) => {
+    return true;
+}
+export const genNewOrderID = async () => {
+    return 'CS009';
+}
+export const deleteOrder = async (data) => {
+    return true;
+}
+//
+export const updateProduct = async (id, data) => {
+    return true;
+}
+export const addingProduct = async (data) => {
+    return true;
+}
+export const genNewProductID = async () => {
+    return 'CS009';
+}
+export const deleteProduct = async (data) => {
+    return true;
+}
+//
+export const updateImport = async (id, data) => {
+    return true;
+}
+export const addingImport = async (data) => {
+    return true;
+}
+export const genNewImportID = async () => {
+    return 'CS009';
+}
+export const deleteImport = async (data) => {
+    return true;
+}

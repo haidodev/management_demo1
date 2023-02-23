@@ -1,26 +1,39 @@
 import { Table } from "../Table/Table";
-import { getData } from "./customer";
-import { useLoaderData, Link, Form } from "react-router-dom";
+import { useLoaderData, Form, Link } from "react-router-dom";
 import { XMarkIcon, PencilSquareIcon } from '@heroicons/react/20/solid'
-import { requestForData } from "../additionalFunction";
 export const loader = async ({ params }) => {
-    const customer_infor = await getData(params.customerId);
-    const {tableData} = await requestForData('order_customer');
-    return {customer_infor, tableData};
-}
-export const CustomerDetail = () => {
-    const {customer_infor, tableData} = useLoaderData();
-    console.log(tableData)
+    const getData = async (id) => {
+        const import_infor = {
+            import_id: 'OR001',
+            date_ordered: '2023/01/02',
+            customer_id: 'CS001',
+            customer_name: 'Mai Duc An',
+            status: 'Shipping'
+        }
+        return import_infor;
+    }
+    const data = await getData(params.customerId);
 
-    console.log()
+    return data;
+}
+
+
+
+
+export const ImportDetail = () => {
+    const import_infor = useLoaderData();
     return <div>
         <div className="pb-4 mb-8 border-b border-gray-200 dark:border-gray-800">
-            <h1 className="text-3xl font-bold uppercase mb-2">{customer_infor.name}</h1>
-            <h2 className="text-lg text-gray-500 dark:text-gray-400">Email: {customer_infor.email}</h2>
-            <h2 className="text-lg text-gray-500 dark:text-gray-400">Phone Number: {customer_infor.phone_number}</h2>
-            <h2 className="text-lg text-gray-500 dark:text-gray-400">Address: {customer_infor.address}</h2>
-            <h2 className="text-lg text-gray-500 dark:text-gray-400">Customer ID: {customer_infor.customer_id.toUpperCase()}</h2>
-            <h2 className="text-lg text-gray-500 dark:text-gray-400">Ranking: {customer_infor.ranking}</h2>
+            <h1 className="text-3xl font-bold uppercase mb-2">Import: #{import_infor.import_id}</h1>
+            <h2 className="text-lg text-gray-500 dark:text-gray-400">This order was ordered on: {import_infor.date_ordered}</h2>
+            <h2 className="text-lg text-gray-500 dark:text-gray-400">
+                {"Ordered By: "}
+                <Link to={`/provider/${import_infor.customer_id}`}>
+                    <span className="underline decoration-sky-500">{import_infor.customer_id} - {import_infor.customer_name}</span>
+                </Link>
+            </h2>
+            <h2 className="text-lg text-gray-500 dark:text-gray-400">Status: {import_infor.status}</h2>
+
             <div className="mb-4"></div>
             <div className="flex">
                 <Form action="edit">
@@ -48,9 +61,8 @@ export const CustomerDetail = () => {
                 </Form>
             </div>
         </div>
-
-        <h2 className="mt-2 text-2xl font-semibold">Recent Order</h2>
-        <Table dataType="order_customer" _tableData={tableData}></Table>
+        <h2 className="mt-2 text-2xl font-semibold">Product detail: </h2>
+        <Table dataType="product_order"></Table>
     </div>
 
 }
