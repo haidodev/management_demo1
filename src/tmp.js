@@ -217,13 +217,19 @@
 //     </>`))
 
 
-function objFac(id) {
-    return {
-        id: id,
-        value: Math.floor(Math.random() * 100)
-    }
+// function objFac(id) {
+//     return {
+//         id: id,
+//         value: Math.floor(Math.random() * 100)
+//     }
+// }
+// const arr = [];
+// for (let i = 0; i < 10; ++i) arr.push(objFac(i));
+// console.log(arr);
+// console.log(arr.reduce((a, b) => a + b.value, 0))
+
+function f(a, b){
+    return a;
 }
-const arr = [];
-for (let i = 0; i < 10; ++i) arr.push(objFac(i));
-console.log(arr);
-console.log(arr.reduce((a, b) => a + b.value, 0))
+console.log(f(1, 2));
+console.log(f(1));

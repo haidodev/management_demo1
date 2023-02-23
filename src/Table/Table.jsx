@@ -14,19 +14,19 @@ const requiredSearchBar = [
     'inventory',
     'customer',
     'provider',
-    'import_product',
+    '_import',
 ];
 
 const requiredFilter = [
     'order',
     'customer',
-    'import_product',
+    '_import',
 ];
 
 const requiredAddingNewRow = [
     'order',
     'customer',
-    'import_product',
+    '_import',
     'provider',
     'inventory'
 ];
@@ -34,15 +34,21 @@ const requireTotalRow = [
     'importDetail',
     'orderDetail'
 ]
-
-export const Table = ({ dataType, _tableData }) => {
+const redirectPath = {
+    orderFromCustomer: 'order',
+    importFromProvider: 'import',
+    orderDetail: 'inventory',
+    importDetail: 'inventory'
+}
+export const Table = ({ dataType, params }) => {
     const navigate = useNavigate();
     const column = data[dataType].column;
-    const [tableData, sortData] = useSortableTable(_tableData);
+    const [tableData, sortData] = useSortableTable(dataType, params);
     const [setFilterValue, filterCondition] = useFilter(dataType)
     const [inputField, handleInputChange, searchCondition] = useSearchBar(dataType);
     const handleRowClick = (id) => {
-        navigate(`/${dataType}/${id}`);
+        if (redirectPath.hasOwnProperty(dataType)) navigate(`/${redirectPath[dataType]}/${id}`)
+        else navigate(`/${dataType}/${id}`);
     }
 
     return (<>

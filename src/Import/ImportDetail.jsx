@@ -16,15 +16,14 @@ export const loader = async ({ params }) => {
         return import_infor;
     }
     const import_infor = await getData(params.customerId);
-    const {tableData} = await requestForData('importDetail');
-    return {import_infor, tableData};
+    return import_infor;
 }
 
 
 
 
 export const ImportDetail = () => {
-    const {import_infor, tableData} = useLoaderData();
+    const import_infor = useLoaderData();
     return <div>
         <div className="pb-4 mb-8 border-b border-gray-200 dark:border-gray-800">
             <h1 className="text-3xl font-bold uppercase mb-2">Import: #{import_infor.import_id}</h1>
@@ -65,7 +64,7 @@ export const ImportDetail = () => {
             </div>
         </div>
         <h2 className="mt-2 text-2xl font-semibold">Product detail: </h2>
-        <Table dataType="importDetail" _tableData={tableData}></Table>
+        <Table dataType="importDetail" params={import_infor.import_id}></Table>
     </div>
 
 }

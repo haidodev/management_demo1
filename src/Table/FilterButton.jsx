@@ -21,7 +21,7 @@ const preset = {
         ],
         default: 'Select Time Stamp'
     },
-    import_product: {
+    _import: {
         icon: <BsFillClockFill className='w-4 h-4 mr-2 text-gray-400'/>,
         options: [
             'Last day',

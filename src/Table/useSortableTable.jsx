@@ -1,9 +1,15 @@
 import { useState, useEffect } from "react";
 import { requestForData, fetchData } from "../additionalFunction";
 
-export const useSortableTable = (_tableData) => {
-    const [tableData, setTableData] = useState(_tableData);
-
+export const useSortableTable = (dataType, params) => {
+    const [tableData, setTableData] = useState(null);
+    useEffect(() => {
+        setTableData(null);
+        (async () => {
+            const requestedTableData = await requestForData(dataType, params);
+            setTableData(requestedTableData.tableData);
+        })();
+    }, [dataType])
     const sortData = (sortField, sortOrder) => {
         if (!tableData) return;
         if (!tableData[0].hasOwnProperty(sortField)) return;

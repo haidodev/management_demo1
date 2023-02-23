@@ -152,12 +152,12 @@ const router = createBrowserRouter([
       },
       //Import
       {
-        path: "import_product/:importId",
+        path: "import/:importId",
         element: <ImportDetail />,
         loader: importLoader
       },
       {
-        path: "import_product/:importId/delete",
+        path: "import/:importId/delete",
         action: importDelete
       }
     ]

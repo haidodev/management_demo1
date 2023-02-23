@@ -5,12 +5,10 @@ import { XMarkIcon, PencilSquareIcon } from '@heroicons/react/20/solid'
 import { requestForData } from "../additionalFunction";
 export const loader = async ({ params }) => {
     const customer_infor = await getData(params.customerId);
-    const {tableData} = await requestForData('orderFromCustomer');
-    return {customer_infor, tableData};
+    return customer_infor
 }
 export const CustomerDetail = () => {
-    const {customer_infor, tableData} = useLoaderData();
-    console.log(tableData)
+    const customer_infor = useLoaderData();
 
     console.log()
     return <div>
@@ -50,7 +48,7 @@ export const CustomerDetail = () => {
         </div>
 
         <h2 className="mt-2 text-2xl font-semibold">Recent Order</h2>
-        <Table dataType="orderFromCustomer" _tableData={tableData}></Table>
+        <Table dataType="orderFromCustomer" params={customer_infor.customer_id}></Table>
     </div>
 
 }

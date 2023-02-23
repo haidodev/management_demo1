@@ -16,15 +16,14 @@ export const loader = async ({ params }) => {
         return order_infor;
     }
     const order_infor = await getData(params.customerId);
-    const {tableData} = await requestForData('orderDetail');
-    return {order_infor, tableData};
+    return order_infor;
 }
 
 
 
 
 export const OrderDetail = () => {
-    const {order_infor, tableData} = useLoaderData();
+    const order_infor = useLoaderData();
     return <div>
         <div className="pb-4 mb-8 border-b border-gray-200 dark:border-gray-800">
             <h1 className="text-3xl font-bold uppercase mb-2">ORDER: #{order_infor.order_id}</h1>
@@ -65,7 +64,7 @@ export const OrderDetail = () => {
             </div>
         </div>
         <h2 className="mt-2 text-2xl font-semibold">Product detail: </h2>
-        <Table dataType="orderDetail" _tableData={tableData}></Table>
+        <Table dataType="orderDetail" params={order_infor.order_id}></Table>
     </div>
 
 }

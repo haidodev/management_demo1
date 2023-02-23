@@ -5,25 +5,21 @@ import { headers } from "./Information"
 import { requestForData } from "./additionalFunction"
 
 export const loader = async ({ params }) => {
-    const data = await requestForData(params.data);
-    return {
-        tableData: data.tableData,
-        dataType: params.data
-    };
+    return params.data;
 }
 export const MainContent = () => {
     const capitalizeFirstLetter = (string) => {
         if (!string) return "";
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
-    const { tableData, dataType } = useLoaderData();
+    const dataType = useLoaderData();
     useEffect(() => {
         document.title = capitalizeFirstLetter(dataType);
     }, [dataType]);
     return (
         <>
             {headers[dataType]}
-            <Table dataType={dataType} _tableData={tableData} />
+            <Table dataType={dataType} />
         </>
     )
 }

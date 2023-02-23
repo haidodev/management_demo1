@@ -15,11 +15,10 @@ export const loader = async ({ params }) => {
         return provider_infor;
     }
     const provider_infor = await getData(params.customerId);
-    const {tableData} = await requestForData('importFromProvider');
-    return {provider_infor, tableData};
+    return provider_infor
 }
 export const ProviderDetail = () => {
-    const {provider_infor, tableData} = useLoaderData();
+    const provider_infor = useLoaderData();
     return <div>
         <div className="pb-4 mb-8 border-b border-gray-200 dark:border-gray-800">
             <h1 className="text-3xl font-bold uppercase mb-2">{provider_infor.name}</h1>
@@ -55,7 +54,7 @@ export const ProviderDetail = () => {
             </div>
         </div>
         <h2 className="mt-2 text-2xl font-semibold">Recent Import</h2>
-        <Table dataType="importFromProvider" _tableData={tableData}></Table>
+        <Table dataType="importFromProvider" params={provider_infor.provider_id}></Table>
     </div>
 
 }

@@ -87,4 +87,4 @@ const orderFromCustomer = {
     ]
 }
 
-export const data = {inventory, orderDetail, order, customer, provider, _import, orderFromCustomer, importFromProvider, importDetail}
+export const data = {inventory, orderDetail, order, customer, provider, 'import':_import, orderFromCustomer, importFromProvider, importDetail}
