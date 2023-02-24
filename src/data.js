@@ -64,9 +64,10 @@ const _import = {
     column: [
         { label: 'ID', accessor: 'id', sortable: true },
         { label: 'Provider Name', accessor: 'provider_name', sortable: true },
-        { label: 'Phone Number', accessor: 'phone_number', sortable: false },
         { label: 'Date', accessor: 'date', sortable: true },
         { label: 'Total', accessor: 'total', sortable: true },
+        { label: 'Status', accessor: 'status', sortable: false },
+
     ]
 }
 const importFromProvider = {

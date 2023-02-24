@@ -1,6 +1,6 @@
 import { Table } from "../Table/Table";
 import { useLoaderData, Form, Link } from "react-router-dom";
-import { XMarkIcon, PencilSquareIcon } from '@heroicons/react/20/solid'
+import { XMarkIcon, TrashIcon, CheckIcon } from '@heroicons/react/20/solid'
 import { requestForData } from "../additionalFunction";
 
 
@@ -11,7 +11,7 @@ export const loader = async ({ params }) => {
             date_ordered: '2023/01/02',
             customer_id: 'CS001',
             customer_name: 'Mai Duc An',
-            status: 'Shipping'
+            status: 'Checked'
         }
         return import_infor;
     }
@@ -38,12 +38,40 @@ export const ImportDetail = () => {
 
             <div className="mb-4"></div>
             <div className="flex">
-                <Form action="edit">
-                    <button type="submit" className="inline-flex items-center text-gray-500 justify-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                        <PencilSquareIcon className="h-5 w-5" />
-                        <h1 className="ml-2">Edit</h1>
+                {import_infor.status == 'Unchecked' && <Form
+                    action="approve"
+                    method="post"
+                    onSubmit={(event) => {
+                        if (
+                            !confirm(
+                                "Please confirm you want to approve this record."
+                            )
+                        ) {
+                            event.preventDefault();
+                        }
+                    }}>
+                    <button type="submit" className="inline-flex items-center focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                        <CheckIcon className="h-5 w-5" />
+                        <h1 className="ml-2">Approve</h1>
                     </button>
-                </Form>
+                </Form>}
+                {import_infor.status == 'Unchecked' && <Form
+                    action="reject"
+                    method="post"
+                    onSubmit={(event) => {
+                        if (
+                            !confirm(
+                                "Please confirm you want to reject this record."
+                            )
+                        ) {
+                            event.preventDefault();
+                        }
+                    }}>
+                    <button type="submit" className="inline-flex items-center focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">
+                        <XMarkIcon className="w-5 h-5" />
+                        <h1 className="ml-2">Reject</h1>
+                    </button>
+                </Form>}
                 <Form
                     action="delete"
                     method="post"
@@ -57,7 +85,7 @@ export const ImportDetail = () => {
                         }
                     }}>
                     <button type="submit" className="inline-flex items-center text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2 text-center mr-5 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">
-                        <XMarkIcon className="w-5 h-5" />
+                        <TrashIcon className="w-5 h-5" />
                         <h1 className="ml-2">Delete</h1>
                     </button>
                 </Form>

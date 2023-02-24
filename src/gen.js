@@ -9,6 +9,11 @@ function getStatus() {
     if (tmp > 0.33) return 'Shipping';
     return 'Pending';
 }
+function getStatus2() {
+    const tmp = Math.random();
+    if (tmp > 0.5) return 'Checked';
+    return 'Unchecked';
+}
 function getRanking() {
     const tmp = Math.random();
     if (tmp > 0.9) return 'Gold';
@@ -77,6 +82,7 @@ function factoryImport(id) {
         'phone_number': genPhoneNumber(),
         'date': randomDate(new Date(2023, 0, 1), new Date()),
         'total': Math.floor(Math.random() * 500) + 500,
+        'status': getStatus2()
     }
 }
 function genPhoneNumber(){

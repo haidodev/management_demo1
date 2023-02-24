@@ -13,18 +13,30 @@ import {
   loader as orderLoader
 } from './Order/OrderDetail';
 import { action as orderDelete } from './Order/OrderDelete';
+import { action as orderApprove } from './Order/OrderApprove';
+import { action as orderReject } from './Order/OrderReject';
+
+
 
 import { 
   ImportDetail,
   loader as importLoader
 } from './Import/ImportDetail';
 import { action as importDelete } from './Import/ImportDelete';
+import { action as importApprove } from './Import/ImportApprove';
+import { action as importReject } from './Import/ImportReject';
 
 import {
   ProductDetail,
   loader as productLoader
 } from './Inventory/ProductDetail';
 import { action as productDelete } from './Inventory/ProductDelete';
+import {ProductEdit, action as productEdit} from './Inventory/ProductEdit'
+import {
+  ProductNew,
+  action as productNew, loader as productNewId
+} from './Inventory/ProductNew';
+
 
 import {
   CustomerDetail,
@@ -36,7 +48,8 @@ import {
 } from './Customer/CustomerEdit';
 import {
   CustomerNew,
-  action as customerNew, loader as CustomerNewId
+  action as customerNew, 
+  loader as customerNewId
 } from './Customer/CustomerNew';
 import { action as customerDelete } from './Customer/CustomerDelete';
 import {
@@ -62,27 +75,6 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
-      // {
-      //   path: "order",
-      //   element: <MainContent />,
-      //   loader: mainContentLoader,
-      // },
-      // {
-      //   path: "customer",
-      //   element: <MainContent />,
-      // },
-      // {
-      //   path: "inventory",
-      //   element: <MainContent />,
-      // },
-      // {
-      //   path: "provider",
-      //   element: <MainContent />,
-      // },
-      // {
-      //   path: "import_product",
-      //   element: <MainContent />,
-      // },
       {
         path: "/:data",
         element: <MainContent />,
@@ -97,7 +89,7 @@ const router = createBrowserRouter([
         path: "customer/new",
         element: <CustomerNew />,
         action: customerNew,
-        loader: CustomerNewId
+        loader: customerNewId
       },
       {
         path: "customer/:customerId/edit",
@@ -140,6 +132,14 @@ const router = createBrowserRouter([
         path: "order/:orderId/delete",
         action: orderDelete
       },
+      {
+        path: "order/:orderId/approve",
+        action: orderApprove
+      },
+      {
+        path: "order/:orderId/reject",
+        action: orderReject
+      },
       //Inventory
       {
         path: "inventory/:inventoryId",
@@ -150,6 +150,18 @@ const router = createBrowserRouter([
         path: "inventory/:inventoryId/delete",
         action: productDelete
       },
+      {
+        path: "inventory/:inventoryId/edit",
+        element: <ProductEdit />,
+        loader: productLoader,
+        action: productEdit
+      },
+      {
+        path: "inventory/new",
+        element: <ProductNew />,
+        loader: productNewId,
+        action: productNew
+      },
       //Import
       {
         path: "import/:importId",
@@ -159,7 +171,15 @@ const router = createBrowserRouter([
       {
         path: "import/:importId/delete",
         action: importDelete
-      }
+      },
+      {
+        path: "import/:importId/approve",
+        action: importApprove
+      },
+      {
+        path: "import/:importId/reject",
+        action: importReject
+      },
     ]
   }
 ])

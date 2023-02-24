@@ -14,19 +14,17 @@ const requiredSearchBar = [
     'inventory',
     'customer',
     'provider',
-    '_import',
+    'import',
 ];
 
 const requiredFilter = [
     'order',
     'customer',
-    '_import',
+    'import',
 ];
 
 const requiredAddingNewRow = [
-    'order',
     'customer',
-    '_import',
     'provider',
     'inventory'
 ];

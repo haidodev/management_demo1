@@ -1,5 +1,5 @@
 import {data} from "./data"
-export const requestForData = (dataType) => new Promise(resolve => {
+export const requestForData = (dataType, params) => new Promise(resolve => {
     setTimeout(() => {
         resolve({ tableData: data[dataType].tableData, column: data[dataType].column })
     }, 1000);
@@ -32,16 +32,22 @@ export const deleteProvider = async (data) => {
     return true;
 }
 //
-export const updateOrder = async (id, data) => {
-    return true;
-}
-export const addingOrder = async (data) => {
-    return true;
-}
+// export const updateOrder = async (id, data) => {
+//     return true;
+// }
+// export const addingOrder = async (data) => {
+//     return true;
+// }
 export const genNewOrderID = async () => {
     return 'CS009';
 }
 export const deleteOrder = async (data) => {
+    return true;
+}
+export const approveOrder = async (data) => {
+    return true;
+}
+export const rejectOrder = async (data) => {
     return true;
 }
 //
@@ -58,15 +64,21 @@ export const deleteProduct = async (data) => {
     return true;
 }
 //
-export const updateImport = async (id, data) => {
-    return true;
-}
-export const addingImport = async (data) => {
-    return true;
-}
+// export const updateImport = async (id, data) => {
+//     return true;
+// }
+// export const addingImport = async (data) => {
+//     return true;
+// }
 export const genNewImportID = async () => {
     return 'CS009';
 }
 export const deleteImport = async (data) => {
+    return true;
+}
+export const approveImport = async (data) => {
+    return true;
+}
+export const rejectImport = async (data) => {
     return true;
 }
