@@ -11,7 +11,7 @@ export const loader = async ({ params }) => {
             date_ordered: '2023/01/02',
             customer_id: 'CS001',
             customer_name: 'Mai Duc An',
-            status: 'Shipping'
+            status: 'Pending'
         }
         return order_infor;
     }

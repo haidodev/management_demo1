@@ -4,11 +4,15 @@ import { requestForData, fetchData } from "../additionalFunction";
 export const useSortableTable = (dataType, params) => {
     const [tableData, setTableData] = useState(null);
     useEffect(() => {
+        // const abortController = new AbortController();
         setTableData(null);
         (async () => {
             const requestedTableData = await requestForData(dataType, params);
             setTableData(requestedTableData.tableData);
         })();
+        // return () => {
+        //     abortController.abort();
+        // };
     }, [dataType])
     const sortData = (sortField, sortOrder) => {
         if (!tableData) return;

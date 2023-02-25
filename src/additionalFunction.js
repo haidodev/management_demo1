@@ -82,3 +82,8 @@ export const approveImport = async (data) => {
 export const rejectImport = async (data) => {
     return true;
 }
+
+
+export const validateUser = async ({username, password}) => {
+    return true;
+}

@@ -13,6 +13,7 @@ export const MainContent = () => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
     const dataType = useLoaderData();
+    console.log(dataType);
     useEffect(() => {
         document.title = capitalizeFirstLetter(dataType);
     }, [dataType]);

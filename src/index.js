@@ -7,6 +7,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import App from './App';
+
+
+import { Welcome } from './Welcome';
+import { loader as userLoader } from './NavBar';
 import { ErrorPage } from "./ErrorPage";
 import {
   OrderDetail,
@@ -18,7 +22,7 @@ import { action as orderReject } from './Order/OrderReject';
 
 
 
-import { 
+import {
   ImportDetail,
   loader as importLoader
 } from './Import/ImportDetail';
@@ -31,7 +35,7 @@ import {
   loader as productLoader
 } from './Inventory/ProductDetail';
 import { action as productDelete } from './Inventory/ProductDelete';
-import {ProductEdit, action as productEdit} from './Inventory/ProductEdit'
+import { ProductEdit, action as productEdit } from './Inventory/ProductEdit'
 import {
   ProductNew,
   action as productNew, loader as productNewId
@@ -48,7 +52,7 @@ import {
 } from './Customer/CustomerEdit';
 import {
   CustomerNew,
-  action as customerNew, 
+  action as customerNew,
   loader as customerNewId
 } from './Customer/CustomerNew';
 import { action as customerDelete } from './Customer/CustomerDelete';
@@ -66,6 +70,7 @@ import {
   action as providerNew
 } from './Provider/ProviderNew';
 import { action as providerDelete } from './Provider/ProviderDelete';
+import { OrderNotApproved } from './Order/OrderNotApproved';
 
 
 
@@ -74,7 +79,14 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     errorElement: <ErrorPage />,
+    loader: userLoader,
     children: [
+      {
+        path: "/welcome",
+        element: <Welcome />,
+        loader: userLoader,
+
+      },
       {
         path: "/:data",
         element: <MainContent />,
@@ -133,6 +145,10 @@ const router = createBrowserRouter([
         action: orderDelete
       },
       {
+        path: "order/:orderId/not_approved",
+        element: <OrderNotApproved />
+      },
+      {
         path: "order/:orderId/approve",
         action: orderApprove
       },
@@ -180,6 +196,7 @@ const router = createBrowserRouter([
         path: "import/:importId/reject",
         action: importReject
       },
+
     ]
   }
 ])

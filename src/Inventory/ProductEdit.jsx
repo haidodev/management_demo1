@@ -19,7 +19,7 @@ export const ProductEdit = () => {
         Edit the information for the product:
         <Link to={`/inventory/${product_infor.product_id}`}> <span className="underline decoration-sky-500">{product_infor.product_id}</span></Link>
       </h1>
-      <ProductForm infor={product_infor.product_id} />
+      <ProductForm infor={product_infor} />
     </>
   )
 }
